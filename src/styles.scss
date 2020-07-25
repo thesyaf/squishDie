@@ -6,6 +6,12 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+h1 {
+  background: linear-gradient(145deg, #582c99, #6934b6);
+  box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
+}
+
 .box {
   font-family: sans-serif;
   text-align: center;

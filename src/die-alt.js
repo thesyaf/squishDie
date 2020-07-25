@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isIOS } from 'react-device-detect';
 
 const gimmeDots = (n) => {
   let buttonsArr = [];
@@ -81,8 +82,11 @@ export default function DieAlt(props) {
 
   const roll = (e) => {
     e.stopPropagation();
+    if (!isIOS) {
+      navigator.vibrate();
+    }
     setRollResult(0);
-    setTimeout(() => setRollResult(rnd()), 2000);
+    setTimeout(() => setRollResult(rnd()), 3000);
   };
 
   return (
