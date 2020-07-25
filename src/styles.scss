@@ -45,30 +45,59 @@ body {
     }
   }
 }
-.dot {
+// .dot {
+//   display: flex;
+//   justify-content: center;
+//   margin: 5px;
+//   border-radius: 50%;
+//   // animation: squish-in 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+//   //   &.purple {
+//   //     background: linear-gradient(145deg, #582c99, #6934b6);
+//   //     box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
+//   //   }
+//   &.yellow {
+//     background: linear-gradient(145deg, #ffff4e, #d7d942);
+//     box-shadow: 9px 9px 18px #cbcd3e, -9px -9px 18px #ffff54;
+//   }
+//   &.active {
+//     &.purple {
+//       box-shadow: inset 9px 9px 18px #532a91, inset -9px -9px 18px #7138c4;
+//     }
+//     &.yellow {
+//       box-shadow: inset 9px 9px 18px #cbcd3e, inset -9px -9px 18px #ffff54;
+//     }
+//   }
+// }
+
+.dots-container {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.dot-one {
+  width: 30%;
+  height: 30%;
   display: flex;
   justify-content: center;
-  margin: 5px;
-  border-radius: 50%;
-  animation: squish-in 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  //   &.purple {
-  //     background: linear-gradient(145deg, #582c99, #6934b6);
-  //     box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
-  //   }
-  &.yellow {
-    background: linear-gradient(145deg, #ffff4e, #d7d942);
-    box-shadow: 9px 9px 18px #cbcd3e, -9px -9px 18px #ffff54;
-  }
-  &.active {
+  align-items: center;
+  .dot {
+    width: 80%;
+    height: 80%;
+    margin: 5px;
+    border-radius: 50%;
+    &.hide {
+      animation: squish-out 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    &.show {
+      animation: squish-in 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
     &.purple {
-      box-shadow: inset 9px 9px 18px #532a91, inset -9px -9px 18px #7138c4;
+      box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
     }
-    &.yellow {
-      box-shadow: inset 9px 9px 18px #cbcd3e, inset -9px -9px 18px #ffff54;
-    }
-  }
-  &:active {
-    animation: squish-out 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
 }
 

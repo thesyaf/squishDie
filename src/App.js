@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Die from './die';
+import DieAlt from './die-alt';
 import './styles.scss';
 
 const gimmeDots = (n) => {
@@ -19,7 +20,9 @@ export default function App() {
   return (
     <div className="board">
       <div className="box">
-        <Die />
+        {/* <Die /> */}
+        <DieAlt />
+        <DieAlt />
       </div>
     </div>
   );
