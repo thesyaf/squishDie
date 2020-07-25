@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <div className="board">
-      <h1>ROLL</h1>
+      {/* <h1>ROLL</h1> */}
       <div className="box">
         {/* <Die /> */}
         <DieAlt />
