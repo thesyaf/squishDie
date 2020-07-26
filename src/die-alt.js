@@ -14,19 +14,29 @@ const rnd = () => Math.floor(Math.random() * 6 + 1);
 
 const defaultGrid = [
   [1, 0, 1],
-  [1, 1, 1],
-  [1, 1, 1],
+  [1, 0, 1],
+  [1, 0, 1],
 ];
 
-export default function DieAlt(props) {
-  const [dieOne, setDieOne] = useState([]);
-  const [rollResult, setRollResult] = useState(1);
+export default function DieAlt({ rollDie }) {
+  const [isRolling, setIsRolling] = useState(false);
   const [grid, setGrid] = useState(defaultGrid);
 
   useEffect(() => {
-    setDieOne(gimmeDots(rollResult));
+    setIsRolling(rollDie);
+  }, [rollDie]);
+
+  const getNewGrid = (result) => {
     let newGrid = [];
-    switch (rollResult) {
+    switch (result) {
+      case 0:
+        newGrid = [
+          [0, 0, 0],
+          [0, 1, 0],
+          [0, 0, 0],
+        ];
+        setGrid(newGrid);
+        break;
       case 1:
         newGrid = [
           [0, 0, 0],
@@ -76,17 +86,25 @@ export default function DieAlt(props) {
         setGrid(newGrid);
         break;
     }
-  }, [rollResult]);
+    console.log('g', grid, result);
+  };
 
   const dieSize = '30vh';
 
+  useEffect(() => {
+    if (isRolling) {
+      setTimeout(() => {
+        console.log('roll triggers 2 secs later', isRolling);
+        getNewGrid(rnd());
+      }, 2000);
+    }
+  }, [isRolling]);
+
   const roll = (e) => {
-    e.stopPropagation();
+    e && e.stopPropagation();
     if (!isIOS) {
       window.navigator.vibrate(100);
     }
-    setRollResult(0);
-    setTimeout(() => setRollResult(rnd()), 3000);
   };
 
   return (
@@ -97,9 +115,13 @@ export default function DieAlt(props) {
     >
       <div className="dots-container">
         {grid.map((row) =>
-          row.map((item) => (
-            <div className="dot-one">
-              <span className={`dot purple ${item !== 1 ? 'hide' : 'show'}`} />
+          row.map((item, i) => (
+            <div key={i} className="dot-one">
+              <span
+                className={`dot purple ${
+                  item !== 1 || isRolling ? 'hide' : 'show'
+                }`}
+              />
             </div>
           ))
         )}

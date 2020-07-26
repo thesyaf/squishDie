@@ -1,15 +1,29 @@
+$themes: (
+  purple: (
+    backgroundColor: #6231aa,
+  ),
+  yellow: (
+    backgroundColor: #ffff4e,
+  ),
+);
+
+@mixin color-aware($key, $color) {
+  @each $theme-name, $theme-color in $themes {
+    .#{$theme-name} {
+      #{$key}: map-get(map-get($themes, $theme-name), $color);
+      transition: background-color 2s ease-out;
+    }
+  }
+}
+
+@include color-aware('background-color', 'backgroundColor');
 body {
-  background-color: #6231aa;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-}
-
-h1 {
-  background: linear-gradient(145deg, #582c99, #6934b6);
-  box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
+  transition: background-color 2s ease-out;
 }
 
 .box {
@@ -28,7 +42,7 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  animation: squish-in 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: squish-die-in 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   &.purple {
     background: linear-gradient(145deg, #582c99, #6934b6);
     box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
@@ -51,29 +65,6 @@ h1 {
     }
   }
 }
-// .dot {
-//   display: flex;
-//   justify-content: center;
-//   margin: 5px;
-//   border-radius: 50%;
-//   // animation: squish-in 6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-//   //   &.purple {
-//   //     background: linear-gradient(145deg, #582c99, #6934b6);
-//   //     box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
-//   //   }
-//   &.yellow {
-//     background: linear-gradient(145deg, #ffff4e, #d7d942);
-//     box-shadow: 9px 9px 18px #cbcd3e, -9px -9px 18px #ffff54;
-//   }
-//   &.active {
-//     &.purple {
-//       box-shadow: inset 9px 9px 18px #532a91, inset -9px -9px 18px #7138c4;
-//     }
-//     &.yellow {
-//       box-shadow: inset 9px 9px 18px #cbcd3e, inset -9px -9px 18px #ffff54;
-//     }
-//   }
-// }
 
 .dots-container {
   width: 90%;
@@ -96,10 +87,10 @@ h1 {
     margin: 5px;
     border-radius: 50%;
     &.hide {
-      animation: squish-out 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: squish-dot-out 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     }
     &.show {
-      animation: squish-in 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: squish-dot-in 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     }
     &.purple {
       box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
@@ -107,32 +98,39 @@ h1 {
   }
 }
 
-@keyframes squish-in {
+@keyframes squish-die-in {
   0% {
     box-shadow: 0 0 0 #532a91, 0 0 0 #7138c4;
-    // -webkit-transform: translateZ(-1400px);
-    // transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  50% {
+    box-shadow: 0 0 0 #532a91, 0 0 0 #7138c4;
     opacity: 0;
   }
   100% {
     box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
-    // -webkit-transform: translateZ(0);
-    // transform: translateZ(0);
     opacity: 1;
   }
 }
 
-@keyframes squish-out {
+@keyframes squish-dot-in {
   0% {
-    box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
-    // -webkit-transform: translateZ(-1400px);
-    // transform: translateZ(-1400px);
+    box-shadow: 0 0 0 #532a91, 0 0 0 #7138c4;
     opacity: 0;
   }
   100% {
-    box-shadow: 0 0 0 #532a91, 0 0 0 #7138c4;
-    // -webkit-transform: translateZ(0);
-    // transform: translateZ(0);
+    box-shadow: 9px 9px 18px #532a91, -9px -9px 18px #7138c4;
     opacity: 1;
+  }
+}
+
+@keyframes squish-dot-out {
+  0% {
+    box-shadow: 9px 9px 18p, -9px -9px 18px;
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0 0 0 #532a91, 0 0 0 #7138c4;
+    opacity: 0;
   }
 }

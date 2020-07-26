@@ -1,29 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import Die from './die';
 import DieAlt from './die-alt';
 import './styles.scss';
 
-const gimmeDots = (n) => {
-  let buttonsArr = [];
-  for (let index = 0; index < n; index++) {
-    buttonsArr.push({ id: index, active: false });
-  }
-
-  return buttonsArr;
-};
-
 export default function App() {
-  const handleClick = (c) => {
-    console.log('i be clicked', c);
+  const [isRolling, setIsRolling] = useState(false);
+
+  useEffect(() => {
+    if (document.documentElement.className === '') {
+      document.documentElement.className = 'purple';
+    }
+  });
+
+  useEffect(() => {
+    if (isRolling) {
+      setTimeout(() => {
+        setIsRolling(false);
+      }, 3000);
+    }
+  }, [isRolling]);
+
+  const changeColour = (c) => {
+    //clear classes
+    document.documentElement.className = '';
+    //add color class
+    document.documentElement.classList.add(c);
+  };
+
+  const roll = () => {
+    if (!isRolling) {
+      setIsRolling(true);
+    }
   };
 
   return (
-    <div className="board">
-      {/* <h1>ROLL</h1> */}
+    <div>
+      {/* <button onClick={(e) => changeColour('yellow')}>yellow</button>
+      <button onClick={(e) => changeColour('purple')}>purple</button> */}
+      <button onClick={(e) => roll(e)}>
+        {isRolling ? '...Rolling...' : 'Roll Dice'}
+      </button>
       <div className="box">
-        {/* <Die /> */}
-        <DieAlt />
-        <DieAlt />
+        <DieAlt rollDie={isRolling} />
+        <DieAlt rollDie={isRolling} />
       </div>
     </div>
   );
