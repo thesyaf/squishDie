@@ -36,12 +36,16 @@ export default function App() {
     <div>
       {/* <button onClick={(e) => changeColour('yellow')}>yellow</button>
       <button onClick={(e) => changeColour('purple')}>purple</button> */}
-      <button onClick={(e) => roll(e)}>
-        {isRolling ? '...Rolling...' : 'Roll Dice'}
-      </button>
       <div className="box">
         <DieAlt rollDie={isRolling} />
         <DieAlt rollDie={isRolling} />
+      </div>
+      <div
+        className="roll-button"
+        onClick={(e) => roll(e)}
+        disabled={isRolling}
+      >
+        ROLL
       </div>
     </div>
   );

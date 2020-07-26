@@ -26,6 +26,25 @@ body {
   transition: background-color 2s ease-out;
 }
 
+.roll-button {
+  animation: squish-die-in 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  height: 30px;
+  width: fit-content;
+  margin: auto;
+  padding: 5px;
+  border-radius: 5px;
+  color: #6231aa;
+  font-size: 30px;
+  line-height: 30px;
+  // font-family: Futura;
+  background: linear-gradient(45deg, #6934b6, #582c99);
+  box-shadow: 9px -9px 18px #532a91, -9px 9px 18px #7138c4;
+  text-shadow: 1px 2px 2px #532a91, -2px -1px 8px #7138c4;
+  text-align: center;
+  // -webkit-background-clip: text;
+  // -moz-background-clip: text;
+}
+
 .box {
   font-family: sans-serif;
   text-align: center;
@@ -34,6 +53,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .die {
   padding: 20px;
   margin: 20px;

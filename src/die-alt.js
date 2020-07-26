@@ -94,7 +94,6 @@ export default function DieAlt({ rollDie }) {
   useEffect(() => {
     if (isRolling) {
       setTimeout(() => {
-        console.log('roll triggers 2 secs later', isRolling);
         getNewGrid(rnd());
       }, 2000);
     }
@@ -107,12 +106,15 @@ export default function DieAlt({ rollDie }) {
     }
   };
 
+  const dieStyle = {
+    width: '30vh',
+    height: '30vh',
+    background: 'linear-gradient(145deg, #582c99, #6934b6)',
+    boxShadow: '9px 9px 18px #532a91, -9px -9px 18px #7138c4;',
+  };
+
   return (
-    <div
-      className="die purple"
-      style={{ width: dieSize, height: dieSize }}
-      onClick={(e) => roll(e)}
-    >
+    <div className="die" style={dieStyle} onClick={(e) => roll(e)}>
       <div className="dots-container">
         {grid.map((row) =>
           row.map((item, i) => (
