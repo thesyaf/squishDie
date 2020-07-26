@@ -83,7 +83,7 @@ export default function DieAlt(props) {
   const roll = (e) => {
     e.stopPropagation();
     if (!isIOS) {
-      navigator.vibrate();
+      window.navigator.vibrate(100);
     }
     setRollResult(0);
     setTimeout(() => setRollResult(rnd()), 3000);
